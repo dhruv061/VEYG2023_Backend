@@ -53,8 +53,79 @@ const UserSchema = mongoose.Schema({
   },
 });
 
-//create Collection
+//schema for games
+const participatedSchema = mongoose.Schema({
+  //for player-1
+  leadername: {
+    required: true,
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  leaderemail: {
+    required: true,
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+
+  //for player-2
+  player2name: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  player2email: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+
+  //for player-3
+  player3name: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  player3email: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+
+  //for player-4
+  player4name: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  player4email: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+
+  //for player-5
+  player5name: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  player5email: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+
+  //for transaction
+  transactionid: {
+    required: true,
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+});
+
+//create Collection for User
 const DegreeUsers = mongoose.model("DegreeUsers", UserSchema);
 const DiplomaUsers = mongoose.model("DiplomaUsers", UserSchema);
 
-module.exports = { DegreeUsers, DiplomaUsers };
+//create Collection for Participated
+
+const Techtaimnet = mongoose.model("TechTainment", participatedSchema);
+const Talaash = mongoose.model(
+  "Talaash-The technical Treasure hunt",
+  participatedSchema
+);
+const Dekathon = mongoose.model("Dekathon", participatedSchema);
+
+module.exports = { DegreeUsers, DiplomaUsers, Techtaimnet, Talaash, Dekathon };

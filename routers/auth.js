@@ -1,7 +1,7 @@
 const express = require("express");
 
 //for call schema with model
-const { DegreeUsers, DiplomaUsers } = require("../model/user");
+const { DegreeUsers, DiplomaUsers, Techtaimnet,Talaash,Dekathon } = require("../model/user");
 
 const authorRouter = express.Router();
 //for paswword compare || store hash password
@@ -193,6 +193,103 @@ authorRouter.get("/api/Degree/GetUserData", auth, async (req, res) => {
 authorRouter.get("/api/Diploma/GetUserData", auth, async (req, res) => {
   const user = await DiplomaUsers.findById(req.user);
   res.json({ ...user._doc, token: req.token });
+});
+
+//when user participated then store user detail in particluar game
+
+//for techtainment
+authorRouter.post("/api/Degree/Games/Techtaimnet", async (req, res) => {
+  try {
+    //-->get the data from the client
+    const {
+      leadername,
+      leaderemail,
+      player2name,
+      player2email,
+      player3name,
+      player3email,
+      transactionid,
+    } = req.body;
+
+    let techtaimentUser = new Techtaimnet({
+      leadername,
+      leaderemail,
+      player2name,
+      player2email,
+      player3name,
+      player3email,
+      transactionid,
+    });
+
+    techtaimentUser = await techtaimentUser.save();
+    res.status(201).send(techtaimentUser);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+//for Talaash
+authorRouter.post("/api/Degree/Games/Talaash", async (req, res) => {
+  try {
+    //-->get the data from the client
+    const {
+      leadername,
+      leaderemail,
+      player2name,
+      player2email,
+    
+      transactionid,
+    } = req.body;
+
+    let talaashUser = new Talaash({
+      leadername,
+      leaderemail,
+      player2name,
+      player2email,   
+      transactionid,
+    });
+
+    talaashUser = await talaashUser.save();
+    res.status(201).send(talaashUser);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+
+//for Dekathon
+authorRouter.post("/api/Degree/Games/Dekathon", async (req, res) => {
+  try {
+    //-->get the data from the client
+    const {
+      leadername,
+      leaderemail,
+      player2name,
+      player2email,
+      player3name,
+      player3email,
+      player4name,
+      player4email,
+      transactionid,
+    } = req.body;
+
+    let dekathonUser = new Dekathon({
+      leadername,
+      leaderemail,
+      player2name,
+      player2email, 
+      player3name,
+      player3email,
+      player4name,
+      player4email,
+      transactionid,
+    });
+
+    dekathonUser = await dekathonUser.save();
+    res.status(201).send(dekathonUser);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
 });
 
 module.exports = authorRouter;
