@@ -61,7 +61,20 @@ const participatedSchema = mongoose.Schema({
     type: String,
     trim: true, //trim remove space in user input
   },
+
   leaderemail: {
+    required: true,
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+
+  leadercollgename: {
+    required: true,
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+
+  leaderenrollmentNo: {
     required: true,
     type: String,
     trim: true, //trim remove space in user input
@@ -76,6 +89,14 @@ const participatedSchema = mongoose.Schema({
     type: String,
     trim: true, //trim remove space in user input
   },
+  player2collgename: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  player2enrollmentNo: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
 
   //for player-3
   player3name: {
@@ -83,6 +104,14 @@ const participatedSchema = mongoose.Schema({
     trim: true, //trim remove space in user input
   },
   player3email: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  player3collgename: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  player3enrollmentNo: {
     type: String,
     trim: true, //trim remove space in user input
   },
@@ -96,6 +125,14 @@ const participatedSchema = mongoose.Schema({
     type: String,
     trim: true, //trim remove space in user input
   },
+  player4collgename: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  player4enrollmentNo: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
 
   //for player-5
   player5name: {
@@ -103,6 +140,14 @@ const participatedSchema = mongoose.Schema({
     trim: true, //trim remove space in user input
   },
   player5email: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  player5collgename: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  player5enrollmentNo: {
     type: String,
     trim: true, //trim remove space in user input
   },

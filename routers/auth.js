@@ -1,7 +1,13 @@
 const express = require("express");
 
 //for call schema with model
-const { DegreeUsers, DiplomaUsers, Techtaimnet,Talaash,Dekathon } = require("../model/user");
+const {
+  DegreeUsers,
+  DiplomaUsers,
+  Techtaimnet,
+  Talaash,
+  Dekathon,
+} = require("../model/user");
 
 const authorRouter = express.Router();
 //for paswword compare || store hash password
@@ -195,8 +201,8 @@ authorRouter.get("/api/Diploma/GetUserData", auth, async (req, res) => {
   res.json({ ...user._doc, token: req.token });
 });
 
+// ****************************************************************************************//
 //when user participated then store user detail in particluar game
-
 //for techtainment
 authorRouter.post("/api/Degree/Games/Techtaimnet", async (req, res) => {
   try {
@@ -235,17 +241,25 @@ authorRouter.post("/api/Degree/Games/Talaash", async (req, res) => {
     const {
       leadername,
       leaderemail,
+      leadercollgename,
+      leaderenrollmentNo,
       player2name,
       player2email,
-    
+      player2collgename,
+      player2enrollmentNo,
+
       transactionid,
     } = req.body;
 
     let talaashUser = new Talaash({
       leadername,
       leaderemail,
+      leadercollgename,
+      leaderenrollmentNo,
       player2name,
-      player2email,   
+      player2email,
+      player2collgename,
+      player2enrollmentNo,
       transactionid,
     });
 
@@ -256,7 +270,6 @@ authorRouter.post("/api/Degree/Games/Talaash", async (req, res) => {
   }
 });
 
-
 //for Dekathon
 authorRouter.post("/api/Degree/Games/Dekathon", async (req, res) => {
   try {
@@ -264,24 +277,40 @@ authorRouter.post("/api/Degree/Games/Dekathon", async (req, res) => {
     const {
       leadername,
       leaderemail,
+      leadercollgename,
+      leaderenrollmentNo,
       player2name,
       player2email,
+      player2collgename,
+      player2enrollmentNo,
       player3name,
       player3email,
+      player3collgename,
+      player3enrollmentNo,
       player4name,
       player4email,
+      player4collgename,
+      player4enrollmentNo,
       transactionid,
     } = req.body;
 
     let dekathonUser = new Dekathon({
       leadername,
       leaderemail,
+      leadercollgename,
+      leaderenrollmentNo,
       player2name,
-      player2email, 
+      player2email,
+      player2collgename,
+      player2enrollmentNo,
       player3name,
       player3email,
+      player3collgename,
+      player3enrollmentNo,
       player4name,
       player4email,
+      player4collgename,
+      player4enrollmentNo,
       transactionid,
     });
 
