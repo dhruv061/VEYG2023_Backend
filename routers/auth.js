@@ -210,20 +210,32 @@ authorRouter.post("/api/Degree/Games/Techtaimnet", async (req, res) => {
     const {
       leadername,
       leaderemail,
+      leadercollgename,
+      leaderenrollmentNo,
       player2name,
       player2email,
+      player2collgename,
+      player2enrollmentNo,
       player3name,
       player3email,
+      player3collgename,
+      player3enrollmentNo,
       transactionid,
     } = req.body;
 
     let techtaimentUser = new Techtaimnet({
       leadername,
       leaderemail,
+      leadercollgename,
+      leaderenrollmentNo,
       player2name,
       player2email,
+      player2collgename,
+      player2enrollmentNo,
       player3name,
       player3email,
+      player3collgename,
+      player3enrollmentNo,
       transactionid,
     });
 
