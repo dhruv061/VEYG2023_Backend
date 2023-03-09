@@ -55,6 +55,20 @@ const UserSchema = mongoose.Schema({
 
 //schema for games
 const participatedSchema = mongoose.Schema({
+  //for transaction
+  transactionid: {
+    required: true,
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+
+  //for time
+  timeDate: {
+    required: true,
+    type: String,
+    trim: true,
+  },
+
   //for player-1
   leadername: {
     required: true,
@@ -151,12 +165,50 @@ const participatedSchema = mongoose.Schema({
     type: String,
     trim: true, //trim remove space in user input
   },
+});
 
-  //for transaction
-  transactionid: {
+//schma for payments
+const paymentsSchema = mongoose.Schema({
+  userId: {
     required: true,
     type: String,
-    trim: true, //trim remove space in user input
+    trim: true,
+  },
+  paymentId: {
+    required: true,
+    type: String,
+    trim: true,
+  },
+  amount: {
+    required: true,
+    type: String,
+    trim: true,
+  },
+  //for time
+  timeDate: {
+    required: true,
+    type: String,
+    trim: true,
+  },
+  gam1Name: {
+    type: String,
+    trim: true,
+  },
+  gam2Name: {
+    type: String,
+    trim: true,
+  },
+  gam3Name: {
+    type: String,
+    trim: true,
+  },
+  gam4Name: {
+    type: String,
+    trim: true,
+  },
+  gam5Name: {
+    type: String,
+    trim: true,
   },
 });
 
@@ -165,7 +217,6 @@ const DegreeUsers = mongoose.model("DegreeUsers", UserSchema);
 const DiplomaUsers = mongoose.model("DiplomaUsers", UserSchema);
 
 //create Collection for Participated
-
 const Techtaimnet = mongoose.model("TechTainment", participatedSchema);
 const Talaash = mongoose.model(
   "Talaash-The technical Treasure hunt",
@@ -173,4 +224,14 @@ const Talaash = mongoose.model(
 );
 const Dekathon = mongoose.model("Dekathon", participatedSchema);
 
-module.exports = { DegreeUsers, DiplomaUsers, Techtaimnet, Talaash, Dekathon };
+//collection for payments
+const Payments = mongoose.model("Payments", paymentsSchema);
+
+module.exports = {
+  DegreeUsers,
+  DiplomaUsers,
+  Payments,
+  Techtaimnet,
+  Talaash,
+  Dekathon,
+};

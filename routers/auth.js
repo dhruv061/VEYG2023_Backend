@@ -4,6 +4,7 @@ const express = require("express");
 const {
   DegreeUsers,
   DiplomaUsers,
+  Payments,
   Techtaimnet,
   Talaash,
   Dekathon,
@@ -202,12 +203,58 @@ authorRouter.get("/api/Diploma/GetUserData", auth, async (req, res) => {
 });
 
 // ****************************************************************************************//
+//Store payments --> that selp to showing payment history
+authorRouter.post("/payments/add", async (req, res) => {
+  try {
+    // --> get data from the client
+    const {
+      userId,
+      paymentId,
+      amount,
+      timeDate,
+      gam1Name,
+      gam2Name,
+      gam3Name,
+      gam4Name,
+      gam5Name,
+    } = req.body;
+
+    let payment = new Payments({
+      userId,
+      paymentId,
+      amount,
+      timeDate,
+      gam1Name,
+      gam2Name,
+      gam3Name,
+      gam4Name,
+      gam5Name,
+    });
+
+    payment = await payment.save();
+    res.status(201).send(payment);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+//get payment History of particluar user
+authorRouter.get("/payments/:userId", async (req, res) => {
+  const userId = req.params.userId;
+  // const payments = await db.collection("Payments").find({ userId }).toArray();
+  const payments = await Payments.find({ userId });
+  res.json(payments);
+});
+
+// ****************************************************************************************//
 //when user participated then store user detail in particluar game
 //for techtainment
 authorRouter.post("/api/Degree/Games/Techtaimnet", async (req, res) => {
   try {
     //-->get the data from the client
     const {
+      transactionid,
+      timeDate,
       leadername,
       leaderemail,
       leadercollgename,
@@ -220,10 +267,11 @@ authorRouter.post("/api/Degree/Games/Techtaimnet", async (req, res) => {
       player3email,
       player3collgename,
       player3enrollmentNo,
-      transactionid,
     } = req.body;
 
     let techtaimentUser = new Techtaimnet({
+      transactionid,
+      timeDate,
       leadername,
       leaderemail,
       leadercollgename,
@@ -236,7 +284,6 @@ authorRouter.post("/api/Degree/Games/Techtaimnet", async (req, res) => {
       player3email,
       player3collgename,
       player3enrollmentNo,
-      transactionid,
     });
 
     techtaimentUser = await techtaimentUser.save();
@@ -251,6 +298,8 @@ authorRouter.post("/api/Degree/Games/Talaash", async (req, res) => {
   try {
     //-->get the data from the client
     const {
+      transactionid,
+      timeDate,
       leadername,
       leaderemail,
       leadercollgename,
@@ -259,11 +308,11 @@ authorRouter.post("/api/Degree/Games/Talaash", async (req, res) => {
       player2email,
       player2collgename,
       player2enrollmentNo,
-
-      transactionid,
     } = req.body;
 
     let talaashUser = new Talaash({
+      transactionid,
+      timeDate,
       leadername,
       leaderemail,
       leadercollgename,
@@ -272,7 +321,6 @@ authorRouter.post("/api/Degree/Games/Talaash", async (req, res) => {
       player2email,
       player2collgename,
       player2enrollmentNo,
-      transactionid,
     });
 
     talaashUser = await talaashUser.save();
@@ -287,6 +335,8 @@ authorRouter.post("/api/Degree/Games/Dekathon", async (req, res) => {
   try {
     //-->get the data from the client
     const {
+      transactionid,
+      timeDate,
       leadername,
       leaderemail,
       leadercollgename,
@@ -303,10 +353,11 @@ authorRouter.post("/api/Degree/Games/Dekathon", async (req, res) => {
       player4email,
       player4collgename,
       player4enrollmentNo,
-      transactionid,
     } = req.body;
 
     let dekathonUser = new Dekathon({
+      transactionid,
+      timeDate,
       leadername,
       leaderemail,
       leadercollgename,
@@ -323,7 +374,6 @@ authorRouter.post("/api/Degree/Games/Dekathon", async (req, res) => {
       player4email,
       player4collgename,
       player4enrollmentNo,
-      transactionid,
     });
 
     dekathonUser = await dekathonUser.save();
