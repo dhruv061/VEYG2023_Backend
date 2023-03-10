@@ -190,25 +190,27 @@ const paymentsSchema = mongoose.Schema({
     type: String,
     trim: true,
   },
-  gam1Name: {
+
+  //for player
+  playername: {
+    required: true,
     type: String,
-    trim: true,
+    trim: true, //trim remove space in user input
   },
-  gam2Name: {
+  playeremail: {
+    required: true,
     type: String,
-    trim: true,
+    trim: true, //trim remove space in user input
   },
-  gam3Name: {
+  playercollgename: {
+    required: true,
     type: String,
-    trim: true,
+    trim: true, //trim remove space in user input
   },
-  gam4Name: {
+  playerenrollmentNo: {
+    required: true,
     type: String,
-    trim: true,
-  },
-  gam5Name: {
-    type: String,
-    trim: true,
+    trim: true, //trim remove space in user input
   },
 });
 

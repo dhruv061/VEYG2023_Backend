@@ -212,11 +212,10 @@ authorRouter.post("/payments/add", async (req, res) => {
       paymentId,
       amount,
       timeDate,
-      gam1Name,
-      gam2Name,
-      gam3Name,
-      gam4Name,
-      gam5Name,
+      playername,
+      playeremail,
+      playercollgename,
+      playerenrollmentNo,
     } = req.body;
 
     let payment = new Payments({
@@ -224,11 +223,10 @@ authorRouter.post("/payments/add", async (req, res) => {
       paymentId,
       amount,
       timeDate,
-      gam1Name,
-      gam2Name,
-      gam3Name,
-      gam4Name,
-      gam5Name,
+      playername,
+      playeremail,
+      playercollgename,
+      playerenrollmentNo,
     });
 
     payment = await payment.save();
