@@ -45,6 +45,11 @@ const UserSchema = mongoose.Schema({
     required: true,
     type: String,
     trim: true,
+  }, 
+  EnNO: {
+    required: true,
+    type: String,
+    trim: true,
   },
   password: {
     required: true,
