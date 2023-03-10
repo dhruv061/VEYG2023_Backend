@@ -4,10 +4,12 @@ const express = require("express");
 const {
   DegreeUsers,
   DiplomaUsers,
-  Payments,
+  DegreePayments,
   Techtaimnet,
   Talaash,
+  theCivilSafari,
   Dekathon,
+  offilceTennis,
 } = require("../model/user");
 
 const authorRouter = express.Router();
@@ -208,7 +210,7 @@ authorRouter.get("/api/Diploma/GetUserData", auth, async (req, res) => {
 
 // ****************************************************************************************//
 //Store payments --> that selp to showing payment history
-authorRouter.post("/payments/add", async (req, res) => {
+authorRouter.post("/Degree/payments/add", async (req, res) => {
   try {
     // --> get data from the client
     const {
@@ -216,21 +218,33 @@ authorRouter.post("/payments/add", async (req, res) => {
       paymentId,
       amount,
       timeDate,
+      GameTalaash,
+      GameTechTainment,
+      GameTheCivilSafari,
+      GameDekathon,
+      GameOfficeTennis,
       playername,
       playeremail,
       playercollgename,
       playerenrollmentNo,
+      playerContectNo,
     } = req.body;
 
-    let payment = new Payments({
+    let payment = new DegreePayments({
       userId,
       paymentId,
       amount,
       timeDate,
+      GameTalaash,
+      GameTechTainment,
+      GameTheCivilSafari,
+      GameDekathon,
+      GameOfficeTennis,
       playername,
       playeremail,
       playercollgename,
       playerenrollmentNo,
+      playerContectNo,
     });
 
     payment = await payment.save();
@@ -241,15 +255,17 @@ authorRouter.post("/payments/add", async (req, res) => {
 });
 
 //get payment History of particluar user
-authorRouter.get("/payments/:userId", async (req, res) => {
+authorRouter.get("/Degree/payments/:userId", async (req, res) => {
   const userId = req.params.userId;
   // const payments = await db.collection("Payments").find({ userId }).toArray();
-  const payments = await Payments.find({ userId });
+  const payments = await DegreePayments.find({ userId });
   res.json(payments);
 });
 
 // ****************************************************************************************//
 //when user participated then store user detail in particluar game
+
+//For Deggree
 //for techtainment
 authorRouter.post("/api/Degree/Games/Techtaimnet", async (req, res) => {
   try {
@@ -261,14 +277,23 @@ authorRouter.post("/api/Degree/Games/Techtaimnet", async (req, res) => {
       leaderemail,
       leadercollgename,
       leaderenrollmentNo,
+      leaderSem,
+      leaderBranch,
+      leaderContactNo,
       player2name,
       player2email,
       player2collgename,
       player2enrollmentNo,
+      player2Sem,
+      player2Branch,
+      player2ContactNo,
       player3name,
       player3email,
       player3collgename,
       player3enrollmentNo,
+      player3Sem,
+      player3Branch,
+      player3ContactNo,
     } = req.body;
 
     let techtaimentUser = new Techtaimnet({
@@ -278,14 +303,23 @@ authorRouter.post("/api/Degree/Games/Techtaimnet", async (req, res) => {
       leaderemail,
       leadercollgename,
       leaderenrollmentNo,
+      leaderSem,
+      leaderBranch,
+      leaderContactNo,
       player2name,
       player2email,
       player2collgename,
       player2enrollmentNo,
+      player2Sem,
+      player2Branch,
+      player2ContactNo,
       player3name,
       player3email,
       player3collgename,
       player3enrollmentNo,
+      player3Sem,
+      player3Branch,
+      player3ContactNo,
     });
 
     techtaimentUser = await techtaimentUser.save();
@@ -306,10 +340,16 @@ authorRouter.post("/api/Degree/Games/Talaash", async (req, res) => {
       leaderemail,
       leadercollgename,
       leaderenrollmentNo,
+      leaderSem,
+      leaderBranch,
+      leaderContactNo,
       player2name,
       player2email,
       player2collgename,
       player2enrollmentNo,
+      player2Sem,
+      player2Branch,
+      player2ContactNo,
     } = req.body;
 
     let talaashUser = new Talaash({
@@ -319,14 +359,83 @@ authorRouter.post("/api/Degree/Games/Talaash", async (req, res) => {
       leaderemail,
       leadercollgename,
       leaderenrollmentNo,
+      leaderSem,
+      leaderBranch,
+      leaderContactNo,
       player2name,
       player2email,
       player2collgename,
       player2enrollmentNo,
+      player2Sem,
+      player2Branch,
+      player2ContactNo,
     });
 
     talaashUser = await talaashUser.save();
     res.status(201).send(talaashUser);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+//for the Civil Safari
+authorRouter.post("/api/Degree/Games/TheCivilSafari", async (req, res) => {
+  try {
+    //-->get the data from the client
+    const {
+      transactionid,
+      timeDate,
+      leadername,
+      leaderemail,
+      leadercollgename,
+      leaderenrollmentNo,
+      leaderSem,
+      leaderBranch,
+      leaderContactNo,
+      player2name,
+      player2email,
+      player2collgename,
+      player2enrollmentNo,
+      player2Sem,
+      player2Branch,
+      player2ContactNo,
+      player3name,
+      player3email,
+      player3collgename,
+      player3enrollmentNo,
+      player3Sem,
+      player3Branch,
+      player3ContactNo,
+    } = req.body;
+
+    let theCivilSafariUser = new theCivilSafari({
+      transactionid,
+      timeDate,
+      leadername,
+      leaderemail,
+      leadercollgename,
+      leaderenrollmentNo,
+      leaderSem,
+      leaderBranch,
+      leaderContactNo,
+      player2name,
+      player2email,
+      player2collgename,
+      player2enrollmentNo,
+      player2Sem,
+      player2Branch,
+      player2ContactNo,
+      player3name,
+      player3email,
+      player3collgename,
+      player3enrollmentNo,
+      player3Sem,
+      player3Branch,
+      player3ContactNo,
+    });
+
+    theCivilSafariUser = await theCivilSafariUser.save();
+    res.status(201).send(theCivilSafariUser);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
@@ -343,18 +452,30 @@ authorRouter.post("/api/Degree/Games/Dekathon", async (req, res) => {
       leaderemail,
       leadercollgename,
       leaderenrollmentNo,
+      leaderSem,
+      leaderBranch,
+      leaderContactNo,
       player2name,
       player2email,
       player2collgename,
       player2enrollmentNo,
+      player2Sem,
+      player2Branch,
+      player2ContactNo,
       player3name,
       player3email,
       player3collgename,
       player3enrollmentNo,
+      player3Sem,
+      player3Branch,
+      player3ContactNo,
       player4name,
       player4email,
       player4collgename,
       player4enrollmentNo,
+      player4Sem,
+      player4Branch,
+      player4ContactNo,
     } = req.body;
 
     let dekathonUser = new Dekathon({
@@ -364,22 +485,83 @@ authorRouter.post("/api/Degree/Games/Dekathon", async (req, res) => {
       leaderemail,
       leadercollgename,
       leaderenrollmentNo,
+      leaderSem,
+      leaderBranch,
+      leaderContactNo,
       player2name,
       player2email,
       player2collgename,
       player2enrollmentNo,
+      player2Sem,
+      player2Branch,
+      player2ContactNo,
       player3name,
       player3email,
       player3collgename,
       player3enrollmentNo,
+      player3Sem,
+      player3Branch,
+      player3ContactNo,
       player4name,
       player4email,
       player4collgename,
       player4enrollmentNo,
+      player4Sem,
+      player4Branch,
+      player4ContactNo,
     });
 
     dekathonUser = await dekathonUser.save();
     res.status(201).send(dekathonUser);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+//for ofice Tennis
+authorRouter.post("/api/Degree/Games/OfficeTenis", async (req, res) => {
+  try {
+    //-->get the data from the client
+    const {
+      transactionid,
+      timeDate,
+      leadername,
+      leaderemail,
+      leadercollgename,
+      leaderenrollmentNo,
+      leaderSem,
+      leaderBranch,
+      leaderContactNo,
+      player2name,
+      player2email,
+      player2collgename,
+      player2enrollmentNo,
+      player2Sem,
+      player2Branch,
+      player2ContactNo,
+    } = req.body;
+
+    let offilceTennisUser = new offilceTennis({
+      transactionid,
+      timeDate,
+      leadername,
+      leaderemail,
+      leadercollgename,
+      leaderenrollmentNo,
+      leaderSem,
+      leaderBranch,
+      leaderContactNo,
+      player2name,
+      player2email,
+      player2collgename,
+      player2enrollmentNo,
+      player2Sem,
+      player2Branch,
+      player2ContactNo,
+    });
+
+    offilceTennisUser = await offilceTennisUser.save();
+    res.status(201).send(offilceTennisUser);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }

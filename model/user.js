@@ -45,7 +45,7 @@ const UserSchema = mongoose.Schema({
     required: true,
     type: String,
     trim: true,
-  }, 
+  },
   EnNO: {
     required: true,
     type: String,
@@ -92,8 +92,23 @@ const participatedSchema = mongoose.Schema({
     type: String,
     trim: true, //trim remove space in user input
   },
-
   leaderenrollmentNo: {
+    required: true,
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+
+  leaderSem: {
+    required: true,
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  leaderBranch: {
+    required: true,
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  leaderContactNo: {
     required: true,
     type: String,
     trim: true, //trim remove space in user input
@@ -116,6 +131,18 @@ const participatedSchema = mongoose.Schema({
     type: String,
     trim: true, //trim remove space in user input
   },
+  player2Sem: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  player2Branch: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  player2ContactNo: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
 
   //for player-3
   player3name: {
@@ -131,6 +158,18 @@ const participatedSchema = mongoose.Schema({
     trim: true, //trim remove space in user input
   },
   player3enrollmentNo: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  player3Sem: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  player3Branch: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  player3ContactNo: {
     type: String,
     trim: true, //trim remove space in user input
   },
@@ -152,6 +191,18 @@ const participatedSchema = mongoose.Schema({
     type: String,
     trim: true, //trim remove space in user input
   },
+  player4Sem: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  player4Branch: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  player4ContactNo: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
 
   //for player-5
   player5name: {
@@ -170,10 +221,22 @@ const participatedSchema = mongoose.Schema({
     type: String,
     trim: true, //trim remove space in user input
   },
+  player5Sem: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  player5Branch: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  player5ContactNo: {
+    type: String,
+    trim: true, //trim remove space in user input
+  },
 });
 
-//schma for payments
-const paymentsSchema = mongoose.Schema({
+//schma for Degree payments
+const DegreepaymentsSchema = mongoose.Schema({
   userId: {
     required: true,
     type: String,
@@ -189,6 +252,7 @@ const paymentsSchema = mongoose.Schema({
     type: String,
     trim: true,
   },
+
   //for time
   timeDate: {
     required: true,
@@ -196,7 +260,29 @@ const paymentsSchema = mongoose.Schema({
     trim: true,
   },
 
-  //for player
+  //for games
+  GameTalaash: {
+    type: String,
+    trim: true,
+  },
+  GameTechTainment: {
+    type: String,
+    trim: true,
+  },
+  GameTheCivilSafari: {
+    type: String,
+    trim: true,
+  },
+  GameDekathon: {
+    type: String,
+    trim: true,
+  },
+  GameOfficeTennis: {
+    type: String,
+    trim: true,
+  },
+
+  //for player Details
   playername: {
     required: true,
     type: String,
@@ -217,28 +303,40 @@ const paymentsSchema = mongoose.Schema({
     type: String,
     trim: true, //trim remove space in user input
   },
+  playerContectNo: {
+    required: true,
+    type: String,
+    trim: true, //trim remove space in user input
+  },
 });
 
+//*********************************************************************************************************/
 //create Collection for User
 const DegreeUsers = mongoose.model("DegreeUsers", UserSchema);
 const DiplomaUsers = mongoose.model("DiplomaUsers", UserSchema);
 
+//for each Game Collection
 //create Collection for Participated
-const Techtaimnet = mongoose.model("TechTainment", participatedSchema);
+const Techtaimnet = mongoose.model("Tech-Tainment", participatedSchema);
 const Talaash = mongoose.model(
   "Talaash-The technical Treasure hunt",
   participatedSchema
 );
+const theCivilSafari = mongoose.model("The Civil Safari", participatedSchema);
 const Dekathon = mongoose.model("Dekathon", participatedSchema);
 
+const offilceTennis = mongoose.model("Office Tennis", participatedSchema);
+
 //collection for payments
-const Payments = mongoose.model("Payments", paymentsSchema);
+const DegreePayments = mongoose.model("Degree Payments", DegreepaymentsSchema);
 
 module.exports = {
   DegreeUsers,
   DiplomaUsers,
-  Payments,
+  DegreePayments,
   Techtaimnet,
   Talaash,
+  theCivilSafari,
   Dekathon,
+  offilceTennis,
 };
