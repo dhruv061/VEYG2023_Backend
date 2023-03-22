@@ -202,6 +202,7 @@ authorRouter.get("/api/Degree/GetUserData", auth, async (req, res) => {
   const user = await DegreeUsers.findById(req.user);
   res.json({ ...user._doc, token: req.token });
 });
+
 //for Diploma
 authorRouter.get("/api/Diploma/GetUserData", auth, async (req, res) => {
   const user = await DiplomaUsers.findById(req.user);
@@ -209,13 +210,16 @@ authorRouter.get("/api/Diploma/GetUserData", auth, async (req, res) => {
 });
 
 // ****************************************************************************************//
+
+//For Degree Students
 //Store payments --> that selp to showing payment history
 authorRouter.post("/Degree/payments/add", async (req, res) => {
   try {
     // --> get data from the client
     const {
       userId,
-      paymentId,
+      cuponCode,
+      paymentStatus,
       amount,
       timeDate,
       GameTalaash,
@@ -232,7 +236,8 @@ authorRouter.post("/Degree/payments/add", async (req, res) => {
 
     let payment = new DegreePayments({
       userId,
-      paymentId,
+      cuponCode,
+      paymentStatus,
       amount,
       timeDate,
       GameTalaash,
@@ -262,6 +267,72 @@ authorRouter.get("/Degree/payments/:userId", async (req, res) => {
   res.json(payments);
 });
 
+//Get Payment Details Using Coupen Code --> Show Payment and all other details to ADMIN
+authorRouter.get(
+  "/Degree/PaymentDetailsForAdmin/:cuponCode",
+  async (req, res) => {
+    const cuponCode = req.params.cuponCode;
+    // const payments = await db.collection("Payments").find({ userId }).toArray();
+    const payments = await DegreePayments.find({ cuponCode });
+    res.json(payments);
+  }
+);
+
+//Update Payment Status Using Coupn Code
+authorRouter.patch("/Degree/EditPaymentStatus/:cuponCode", async (req, res) => {
+  try {
+    //for update payment status in paymentDetails collection
+    const cuponCode = req.params.cuponCode;
+    const update = await DegreePayments.findOneAndUpdate(
+      { cuponCode },
+      req.body
+    );
+
+    //Update payment status in rescpective game also
+    const games = await DegreePayments.find({ cuponCode });
+    const gameTalaash = games[0].GameTalaash;
+    const gameTechTainment = games[0].GameTechTainment;
+    const gameCivilSafari = games[0].GameTheCivilSafari;
+    const gameDekathon = games[0].GameDekathon;
+    const gameOfficeTennish = games[0].GameOfficeTennis;
+
+    //Update payment sttus in respective game
+    //talaash
+    if (gameTalaash == "True") {
+      await Talaash.findOneAndUpdate({ cuponCode }, req.body);
+      console.log("payment status updated in Game Talaash ");
+    }
+
+    //tech tainment
+    if (gameTechTainment == "True") {
+      await Techtaimnet.findOneAndUpdate({ cuponCode }, req.body);
+      console.log("payment status updated in Game TechTainment");
+    }
+
+    //the civil safari
+    if (gameCivilSafari == "True") {
+      await theCivilSafari.findOneAndUpdate({ cuponCode }, req.body);
+      console.log("payment status updated in Game The Civil Safari ");
+    }
+
+    //dekathhon
+    if (gameDekathon == "True") {
+      await Dekathon.findOneAndUpdate({ cuponCode }, req.body);
+      console.log("payment status updated in Game Dekathon");
+    }
+
+    //office tenish
+    if (gameOfficeTennish == "True") {
+      await offilceTennis.findOneAndUpdate({ cuponCode }, req.body);
+      console.log("payment status updated in Game Office Tennis");
+    }
+
+    res.status(201).send(update);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // ****************************************************************************************//
 //when user participated then store user detail in particluar game
 
@@ -271,7 +342,8 @@ authorRouter.post("/api/Degree/Games/Techtaimnet", async (req, res) => {
   try {
     //-->get the data from the client
     const {
-      transactionid,
+      cuponCode,
+      paymentStatus,
       timeDate,
       leadername,
       leaderemail,
@@ -297,7 +369,8 @@ authorRouter.post("/api/Degree/Games/Techtaimnet", async (req, res) => {
     } = req.body;
 
     let techtaimentUser = new Techtaimnet({
-      transactionid,
+      cuponCode,
+      paymentStatus,
       timeDate,
       leadername,
       leaderemail,
@@ -334,7 +407,8 @@ authorRouter.post("/api/Degree/Games/Talaash", async (req, res) => {
   try {
     //-->get the data from the client
     const {
-      transactionid,
+      cuponCode,
+      paymentStatus,
       timeDate,
       leadername,
       leaderemail,
@@ -353,7 +427,8 @@ authorRouter.post("/api/Degree/Games/Talaash", async (req, res) => {
     } = req.body;
 
     let talaashUser = new Talaash({
-      transactionid,
+      cuponCode,
+      paymentStatus,
       timeDate,
       leadername,
       leaderemail,
@@ -383,7 +458,8 @@ authorRouter.post("/api/Degree/Games/TheCivilSafari", async (req, res) => {
   try {
     //-->get the data from the client
     const {
-      transactionid,
+      cuponCode,
+      paymentStatus,
       timeDate,
       leadername,
       leaderemail,
@@ -409,7 +485,8 @@ authorRouter.post("/api/Degree/Games/TheCivilSafari", async (req, res) => {
     } = req.body;
 
     let theCivilSafariUser = new theCivilSafari({
-      transactionid,
+      cuponCode,
+      paymentStatus,
       timeDate,
       leadername,
       leaderemail,
@@ -446,7 +523,8 @@ authorRouter.post("/api/Degree/Games/Dekathon", async (req, res) => {
   try {
     //-->get the data from the client
     const {
-      transactionid,
+      cuponCode,
+      paymentStatus,
       timeDate,
       leadername,
       leaderemail,
@@ -479,7 +557,8 @@ authorRouter.post("/api/Degree/Games/Dekathon", async (req, res) => {
     } = req.body;
 
     let dekathonUser = new Dekathon({
-      transactionid,
+      cuponCode,
+      paymentStatus,
       timeDate,
       leadername,
       leaderemail,
@@ -523,7 +602,8 @@ authorRouter.post("/api/Degree/Games/OfficeTenis", async (req, res) => {
   try {
     //-->get the data from the client
     const {
-      transactionid,
+      cuponCode,
+      paymentStatus,
       timeDate,
       leadername,
       leaderemail,
@@ -542,7 +622,8 @@ authorRouter.post("/api/Degree/Games/OfficeTenis", async (req, res) => {
     } = req.body;
 
     let offilceTennisUser = new offilceTennis({
-      transactionid,
+      cuponCode,
+      paymentStatus,
       timeDate,
       leadername,
       leaderemail,

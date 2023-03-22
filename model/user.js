@@ -60,11 +60,16 @@ const UserSchema = mongoose.Schema({
 
 //schema for games
 const participatedSchema = mongoose.Schema({
-  //for transaction
-  transactionid: {
+  cuponCode: {
     required: true,
     type: String,
-    trim: true, //trim remove space in user input
+    trim: true,
+  },
+  
+  paymentStatus: {
+    required: true,
+    type: String,
+    trim: true,
   },
 
   //for time
@@ -242,7 +247,12 @@ const DegreepaymentsSchema = mongoose.Schema({
     type: String,
     trim: true,
   },
-  paymentId: {
+  cuponCode: {
+    required: true,
+    type: String,
+    trim: true,
+  },
+  paymentStatus: {
     required: true,
     type: String,
     trim: true,
@@ -323,6 +333,7 @@ const Talaash = mongoose.model(
   participatedSchema
 );
 const theCivilSafari = mongoose.model("The Civil Safari", participatedSchema);
+
 const Dekathon = mongoose.model("Dekathon", participatedSchema);
 
 const offilceTennis = mongoose.model("Office Tennis", participatedSchema);
