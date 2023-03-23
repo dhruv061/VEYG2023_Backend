@@ -65,7 +65,7 @@ const participatedSchema = mongoose.Schema({
     type: String,
     trim: true,
   },
-  
+
   paymentStatus: {
     required: true,
     type: String,
@@ -320,11 +320,109 @@ const DegreepaymentsSchema = mongoose.Schema({
   },
 });
 
+//schma for Degree payments
+const DiplomapaymentsSchema = mongoose.Schema({
+  userId: {
+    required: true,
+    type: String,
+    trim: true,
+  },
+  cuponCode: {
+    required: true,
+    type: String,
+    trim: true,
+  },
+  paymentStatus: {
+    required: true,
+    type: String,
+    trim: true,
+  },
+  amount: {
+    required: true,
+    type: String,
+    trim: true,
+  },
+
+  //for time
+  timeDate: {
+    required: true,
+    type: String,
+    trim: true,
+  },
+
+  //for games
+  GameProjectExpo: {
+    type: String,
+    trim: true,
+  },
+  GamePosterTalk: {
+    type: String,
+    trim: true,
+  },
+  GameTechnoSketch: {
+    type: String,
+    trim: true,
+  },
+  GameSharkTank: {
+    type: String,
+    trim: true,
+  },
+  GameGullyCricket: {
+    type: String,
+    trim: true,
+  },
+  GameVadicMaths: {
+    type: String,
+    trim: true,
+  },
+  GameOneMinuteGame: {
+    type: String,
+    trim: true,
+  },
+  GameTechOModel: {
+    type: String,
+    trim: true,
+  },
+  GameMultimediaPrse: {
+    type: String,
+    trim: true,
+  },
+
+  //for player Details
+  playername: {
+    required: true,
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  playeremail: {
+    required: true,
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  playercollgename: {
+    required: true,
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  playerenrollmentNo: {
+    required: true,
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+  playerContectNo: {
+    required: true,
+    type: String,
+    trim: true, //trim remove space in user input
+  },
+});
+
 //*********************************************************************************************************/
 //create Collection for User
 const DegreeUsers = mongoose.model("DegreeUsers", UserSchema);
 const DiplomaUsers = mongoose.model("DiplomaUsers", UserSchema);
 
+//********************************************************/
+//Degree Games Models
 //for each Game Collection
 //create Collection for Participated
 const Techtaimnet = mongoose.model("Tech-Tainment", participatedSchema);
@@ -338,8 +436,25 @@ const Dekathon = mongoose.model("Dekathon", participatedSchema);
 
 const offilceTennis = mongoose.model("Office Tennis", participatedSchema);
 
+//********************************************************/
+//Diploma Games Models
+const ProjectExpo = mongoose.model("Project Expo", participatedSchema);
+const PosterTalk = mongoose.model("Poster Talk", participatedSchema);
+const TechnoSketch = mongoose.model("Techno Sketch", participatedSchema);
+const SharkTank = mongoose.model("Shark Tank", participatedSchema);
+const GullyCricket = mongoose.model("Gully Cricket", participatedSchema);
+const VadicMaths = mongoose.model("Vadic Maths", participatedSchema);
+const OneMinuteGame = mongoose.model("One Minute Game", participatedSchema);
+const TechOModel = mongoose.model("Tech-O-Model", participatedSchema);
+const MultimediaPrse = mongoose.model("MultimediaPrse", participatedSchema);
+
+//********************************************************/
 //collection for payments
 const DegreePayments = mongoose.model("Degree Payments", DegreepaymentsSchema);
+const DiplomaPayments = mongoose.model(
+  "Diploma Payments",
+  DiplomapaymentsSchema
+);
 
 module.exports = {
   DegreeUsers,
@@ -350,4 +465,14 @@ module.exports = {
   theCivilSafari,
   Dekathon,
   offilceTennis,
+  ProjectExpo,
+  PosterTalk,
+  TechnoSketch,
+  SharkTank,
+  GullyCricket,
+  VadicMaths,
+  OneMinuteGame,
+  TechOModel,
+  MultimediaPrse,
+  DiplomaPayments,
 };
