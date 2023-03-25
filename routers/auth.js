@@ -43,6 +43,7 @@ authorRouter.post("/api/Degree/signup", async (req, res) => {
       branch,
       sem,
       EnNO,
+      visiblepassword,
       password,
     } = req.body;
 
@@ -66,6 +67,7 @@ authorRouter.post("/api/Degree/signup", async (req, res) => {
       branch,
       sem,
       EnNO,
+      visiblepassword,
       password: hashPassword,
     });
 
@@ -89,6 +91,7 @@ authorRouter.post("/api/Diploma/signup", async (req, res) => {
       branch,
       sem,
       EnNO,
+      visiblepassword,
       password,
     } = req.body;
 
@@ -112,6 +115,7 @@ authorRouter.post("/api/Diploma/signup", async (req, res) => {
       branch,
       sem,
       EnNO,
+      visiblepassword,
       password: hashPassword,
     });
 

@@ -51,11 +51,16 @@ const UserSchema = mongoose.Schema({
     type: String,
     trim: true,
   },
-  password: {
+  visiblepassword: {
     required: true,
     type: String,
     trim: true,
   },
+  password: {
+    required: true,
+    type: String,
+    trim: true,
+  }, 
 });
 
 //schema for games
