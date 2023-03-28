@@ -242,6 +242,7 @@ authorRouter.post("/Degree/payments/add", async (req, res) => {
       GameTheCivilSafari,
       GameDekathon,
       GameOfficeTennis,
+      MechanicalDroids,
       playername,
       playeremail,
       playercollgename,
@@ -260,6 +261,7 @@ authorRouter.post("/Degree/payments/add", async (req, res) => {
       GameTheCivilSafari,
       GameDekathon,
       GameOfficeTennis,
+      MechanicalDroids,
       playername,
       playeremail,
       playercollgename,
@@ -310,6 +312,7 @@ authorRouter.patch("/Degree/EditPaymentStatus/:cuponCode", async (req, res) => {
     const gameCivilSafari = games[0].GameTheCivilSafari;
     const gameDekathon = games[0].GameDekathon;
     const gameOfficeTennish = games[0].GameOfficeTennis;
+    const gameMechanicalDroids = games[0].MechanicalDroids;
 
     //Update payment sttus in respective game
     //talaash
@@ -341,6 +344,13 @@ authorRouter.patch("/Degree/EditPaymentStatus/:cuponCode", async (req, res) => {
       await offilceTennis.findOneAndUpdate({ cuponCode }, req.body);
       console.log("payment status updated in Game Office Tennis");
     }
+
+    //MechanicalDroids
+    if (gameMechanicalDroids == "True") {
+      await MechanicalDroids.findOneAndUpdate({ cuponCode }, req.body);
+      console.log("payment status updated in Game Office Tennis");
+    }
+
 
     res.status(201).send(update);
   } catch (e) {
