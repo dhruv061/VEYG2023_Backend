@@ -295,6 +295,10 @@ const DegreepaymentsSchema = mongoose.Schema({
   GameOfficeTennis: {
     type: String,
     trim: true,
+  }, 
+  MechanicalDroids: {
+    type: String,
+    trim: true,
   },
 
   //for player Details
@@ -441,6 +445,8 @@ const Dekathon = mongoose.model("Dekathon", participatedSchema);
 
 const offilceTennis = mongoose.model("Office Tennis", participatedSchema);
 
+const MechanicalDroids = mongoose.model("Mechanical Droids", participatedSchema);
+
 //********************************************************/
 //Diploma Games Models
 const ProjectExpo = mongoose.model("Project Expo", participatedSchema);
@@ -470,6 +476,7 @@ module.exports = {
   theCivilSafari,
   Dekathon,
   offilceTennis,
+  MechanicalDroids,
   ProjectExpo,
   PosterTalk,
   TechnoSketch,

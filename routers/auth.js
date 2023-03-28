@@ -10,6 +10,7 @@ const {
   theCivilSafari,
   Dekathon,
   offilceTennis,
+  MechanicalDroids,
   ProjectExpo,
   PosterTalk,
   TechnoSketch,
@@ -820,6 +821,71 @@ authorRouter.post("/api/Degree/Games/OfficeTenis", async (req, res) => {
 
     offilceTennisUser = await offilceTennisUser.save();
     res.status(201).send(offilceTennisUser);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+//MechanicalDroids
+authorRouter.post("/api/Degree/Games/MechanicalDroids", async (req, res) => {
+  try {
+    //-->get the data from the client
+    const {
+      cuponCode,
+      paymentStatus,
+      timeDate,
+      leadername,
+      leaderemail,
+      leadercollgename,
+      leaderenrollmentNo,
+      leaderSem,
+      leaderBranch,
+      leaderContactNo,
+      player2name,
+      player2email,
+      player2collgename,
+      player2enrollmentNo,
+      player2Sem,
+      player2Branch,
+      player2ContactNo,
+      player3name,
+      player3email,
+      player3collgename,
+      player3enrollmentNo,
+      player3Sem,
+      player3Branch,
+      player3ContactNo,
+    } = req.body;
+
+    let MechanicalDroidsUser = new MechanicalDroids({
+      cuponCode,
+      paymentStatus,
+      timeDate,
+      leadername,
+      leaderemail,
+      leadercollgename,
+      leaderenrollmentNo,
+      leaderSem,
+      leaderBranch,
+      leaderContactNo,
+      player2name,
+      player2email,
+      player2collgename,
+      player2enrollmentNo,
+      player2Sem,
+      player2Branch,
+      player2ContactNo,
+      player3name,
+      player3email,
+      player3collgename,
+      player3enrollmentNo,
+      player3Sem,
+      player3Branch,
+      player3ContactNo,
+    });
+
+    MechanicalDroidsUser = await MechanicalDroidsUser.save();
+    res.status(201).send(MechanicalDroidsUser);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
