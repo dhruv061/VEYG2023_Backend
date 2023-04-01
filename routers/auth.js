@@ -10,7 +10,7 @@ const {
   theCivilSafari,
   Dekathon,
   offilceTennis,
-  MechanicalDroids,
+  ScavengerHunt,
   ProjectExpo,
   PosterTalk,
   TechnoSketch,
@@ -242,7 +242,7 @@ authorRouter.post("/Degree/payments/add", async (req, res) => {
       GameTheCivilSafari,
       GameDekathon,
       GameOfficeTennis,
-      MechanicalDroids,
+      ScavengerHunt,
       playername,
       playeremail,
       playercollgename,
@@ -261,7 +261,7 @@ authorRouter.post("/Degree/payments/add", async (req, res) => {
       GameTheCivilSafari,
       GameDekathon,
       GameOfficeTennis,
-      MechanicalDroids,
+      ScavengerHunt,
       playername,
       playeremail,
       playercollgename,
@@ -312,7 +312,7 @@ authorRouter.patch("/Degree/EditPaymentStatus/:cuponCode", async (req, res) => {
     const gameCivilSafari = games[0].GameTheCivilSafari;
     const gameDekathon = games[0].GameDekathon;
     const gameOfficeTennish = games[0].GameOfficeTennis;
-    const gameMechanicalDroids = games[0].MechanicalDroids;
+    const gameScavengerHunt = games[0].ScavengerHunt;
 
     //Update payment sttus in respective game
     //talaash
@@ -345,12 +345,11 @@ authorRouter.patch("/Degree/EditPaymentStatus/:cuponCode", async (req, res) => {
       console.log("payment status updated in Game Office Tennis");
     }
 
-    //MechanicalDroids
-    if (gameMechanicalDroids == "True") {
-      await MechanicalDroids.findOneAndUpdate({ cuponCode }, req.body);
-      console.log("payment status updated in Game Office Tennis");
+    //ScavengerHunt
+    if (gameScavengerHunt == "True") {
+      await ScavengerHunt.findOneAndUpdate({ cuponCode }, req.body);
+      console.log("payment status updated in ScavengerHunt");
     }
-
 
     res.status(201).send(update);
   } catch (e) {
@@ -836,8 +835,8 @@ authorRouter.post("/api/Degree/Games/OfficeTenis", async (req, res) => {
   }
 });
 
-//MechanicalDroids
-authorRouter.post("/api/Degree/Games/MechanicalDroids", async (req, res) => {
+//ScavengerHunt
+authorRouter.post("/api/Degree/Games/ScavengerHunt", async (req, res) => {
   try {
     //-->get the data from the client
     const {
@@ -867,7 +866,7 @@ authorRouter.post("/api/Degree/Games/MechanicalDroids", async (req, res) => {
       player3ContactNo,
     } = req.body;
 
-    let MechanicalDroidsUser = new MechanicalDroids({
+    let ScavengerHuntUserUser = new ScavengerHunt({
       cuponCode,
       paymentStatus,
       timeDate,
@@ -894,8 +893,8 @@ authorRouter.post("/api/Degree/Games/MechanicalDroids", async (req, res) => {
       player3ContactNo,
     });
 
-    MechanicalDroidsUser = await MechanicalDroidsUser.save();
-    res.status(201).send(MechanicalDroidsUser);
+    ScavengerHuntUserUser = await ScavengerHuntUserUser.save();
+    res.status(201).send(ScavengerHuntUserUser);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
