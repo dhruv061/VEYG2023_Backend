@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
+const path = require("path");
 app.use(cors());
 //import file from the other file structure
 const authorRouter = require("./routers/auth");
@@ -15,6 +16,12 @@ const PORT = process.env.PORT || 3000;
 //middleware
 app.use(express.json());
 app.use(authorRouter);
+
+// Serve index.html from the root directory
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
 
 //Database connections
 mongoose.set("strictQuery", false);
